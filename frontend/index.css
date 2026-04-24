@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-chess-bg text-chess-text;
+}
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+
+/* ===== CHESS BOARD ===== */
+
+.sq {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+/* màu ô */
+.sq.L {
+  background: var(--sq-light, #f0d9b5);
+}
+
+.sq.D {
+  background: var(--sq-dark, #b58863);
+}
+
+/* hover */
+.sq:hover {
+  filter: brightness(1.05);
+}
+
+/* selected */
+.sq.sel {
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 0, 0.6);
+}
+
+/* last move */
+.sq.last-from,
+.sq.last-to {
+  background: rgba(255, 255, 0, 0.25);
+}
+
+/* check */
+.sq.chk {
+  background: rgba(255, 0, 0, 0.35);
+}
+
+/* legal move (dot) */
+.sq.legal::after {
+  content: '';
+  width: 22%;
+  height: 22%;
+  background: rgba(0,0,0,0.35);
+  border-radius: 999px;
+}
+
+/* capture move (ring) */
+.sq.capture::after {
+  content: '';
+  position: absolute;
+  inset: 6%;
+  border: 4px solid rgba(0,0,0,0.35);
+  border-radius: 999px;
+}
+
+/* piece */
+.piece {
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+/* coordinates */
+.coord {
+  position: absolute;
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.coord-rank {
+  top: 2px;
+  left: 4px;
+}
+
+.coord-file {
+  bottom: 2px;
+  right: 4px;
+}
